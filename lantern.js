@@ -60,6 +60,37 @@
 	new lb('light','light','fade');
 }
 */
+
+function lantern(selector,options) {
+	//	eg <div id="stuff"><a href="…"><img …>
+	//	div#stuff a
+	var i,images;
+	var background,div,img;
+
+	background=document.createElement('div');
+	background.onclick=hide;
+	div=document.createElement('div');
+	background.appendChild(div);
+	img=document.createElement('img');
+	div.appendChild(img);
+	
+	images=document.querySelectorAll(selector);
+	if(!images.length) return false;
+	for(i=0;i<images.length;i++) {
+		images.onclick=function() {
+			show(this.href);
+			return false;
+		}
+	}
+	function hide() {
+		background.style.display='none';	
+	}
+	function show(src) {
+		img.src=src;
+		background.style.display='block';
+	}
+}
+
 function lb(className,imageDiv,backgroundDiv,next,show) {
 	//	Config
 	className=className?className:'light';
