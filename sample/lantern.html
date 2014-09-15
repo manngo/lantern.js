@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Title</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../lantern.js"></script>
+	<link rel="stylesheet" type="text/css" href="../lantern.css" media="all">
+
+	<script type="text/javascript">
+		window.onload=init;
+		function init() {
+			var options={
+				delay: 1000,
+				escape: true,
+			};
+			lantern('div#slides a',options);
+		}
+	</script>
+	<style type="text/css">
+		h1 {
+			transition: display 1s 1s;
+		}
+		h1:active {
+			border: thin solid red;
+
+		}
+		div {
+			box-sizing: border-box;
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+	</header>
+	<main>
+		<h1>Slides</h1>
+		<div id="slides">
+			<a href="images/preview/wombat.jpg"><img src="images/thumbnail/wombat.jpg" alt="wombat" title="This is a Wombat, which is sort of like a wombat"></a>
+			<a href="images/preview/koala.jpg"><img src="images/thumbnail/koala.jpg" alt="koala"></a>
+			<a href="images/preview/kangaroo.jpg"><img src="images/thumbnail/kangaroo.jpg" alt="kangaroo" title="Kangaroo"></a>
+		</div>
+	</main>
+	<footer>
+	</footer>
+</body>
+</html>
