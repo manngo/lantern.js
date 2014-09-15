@@ -37,6 +37,7 @@
 		position: fixed;
 		padding: 1em;
 		background-color: #f8f8f8;
+		background-color: #ddd;
 		border: thin solid #666;
 	}
 	div#title {
@@ -45,8 +46,7 @@
 		font-family: sans-serif;
 		font-weight: bold;
 		margin: 0;
-		border: thin solid;
-		padding: .25em;
+		padding: .75em;
 
 	}
 
@@ -58,17 +58,31 @@
 	}
 
 	div#lantern {
-		box-shadow: 4px 4px 4px #000;
-		transform: scale(0) rotate(0deg);
+		border-radius: 8px;
+		box-shadow: inset 4px 4px 2px white, inset -4px -4px 4px #999, 4px 4px 4px #000;
+		transform: scale(0);
 		transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	}
 
-	div#lantern[showing] {
-		transform: scale(1) rotate(360deg);
+	div#lantern img {
+		border-radius: 8px;
+		box-shadow: inset 4px 4px 2px #999, inset -4px -4px 4px white;
+		padding: 4px;
 	}
 
 
-		div#background[showing] {
-			border: thick solid #999;
-		}
+	div#lantern[showing] {
+		transform: scale(1);
+	}
+
+	div#title {
+		color: #666;
+		text-shadow: 0px 1px 0px white;
+		border-radius: 4px;
+		box-shadow: inset 4px 4px 2px #999, inset -4px -4px 4px white;
+	}
+
+	div#background[showing] {
+		border: thick solid #999;
+	}
 
