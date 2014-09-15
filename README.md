@@ -39,7 +39,19 @@ To use:
 			showing:	'showing',		//	attribute when showing
 			escape:		false,			//	whether responds to escape key
 			delay:		0,				//	delay (ms) before hiding
+
+			//	new
+			dblclick:	false,			//	whether to use double-click
+			draggable:	false,			//	whether to allow dragging
 		};
+
+5.	The (sample) CSS file comes in three parts. Feel free to tweak as much as you like, but note the following:
+	
+	1.	The essential CSS required for the effect to work at all.
+	2. Some more basic CSS to make it look complete.
+	3. Some CSS3 to make the whole thing look spectacular.
+		
+		Obviously, the CSS won’t work in Legacy™ Browsers.
 
 Disclaimer
 ----------
