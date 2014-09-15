@@ -41,18 +41,18 @@ To use:
 			delay:		0,				//	delay (ms) before hiding
 		};
 
-	Disclaimer:
+Disclaimer
+----------
 
-	This script probably works and it does what it does.  
-	What it doesn’t do it doesn’t do. E & OE
+This script probably works and it does what it does.  
+What it doesn’t do it doesn’t do. E & OE
 
-	To do:
+To do
+-----
 
-	1.	Incorporate slide show.
-	2.	Incorporate div for additional descriptive text:
+1.	Incorporate slide show.
+2.	Incorporate div for additional descriptive text:
 
-		```
 		<a href="..." class="light"><img ... /><div>Description</div></a>
-		```
 
-	3.	Implement callback functions
+3.	Implement callback functions
