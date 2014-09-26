@@ -35,14 +35,17 @@
 		are, well, optional. Set them as an abject as follows:
 
 		var options = {
-			background:	'background',	//	id of background
-			div:		'lantern',		//	id of container
-			title:		'title',		//	id of title
-			showing:	'showing',		//	attribute when showing
-			escape:		false,			//	whether responds to escape key
-			dblclick:	false,			//	whether double-click required
-			draggable:	false,			//	whether to allow dragging
-			delay:		0,				//	delay (ms) before hiding
+			background:		'background',	//	id of background
+			div:			'lantern',		//	id of container
+			title:			'title',		//	id of title
+			showing:		'showing',		//	attribute when showing
+			escape:			false,			//	whether responds to escape key
+			dblclick:		false,			//	whether double-click required
+			draggable:		false,			//	whether to allow dragging
+			delay:			0,				//	delay (ms) before hiding
+			callback:		undefined,		//	callback on showing
+			callbackOn:		undefined,		//	callback on both
+			callbackOff:	undefined,		//	callback on hiding
 		};
 
 	Disclaimer:
@@ -56,6 +59,7 @@
 	2.	Incorporate div for additional descriptive text:
 		<a href="..." class="light"><img ... /><div>Description</div></a>
 	3.	Implement callback functions
+	4.	Re-consider whether the selector above needs to include the a.
 
 	================================================ */
 
@@ -76,129 +80,142 @@
 			options.dblclick=!!options.dblclick;
 			options.draggable=!!options.draggable;
 
-		/*
+			options.callback=options.callback||undefined;
+			options.callbackOn=options.callbackOn||undefined;
+			options.callbackOff=options.callbackOff||undefined;
+
+		/*	Create Lantern Elements
 			================================ */
 
-		var i,images,x=null;
-		var background,div,img,title;
+			var background,div,img,title;
 
-		background=document.createElement('div');
-		background.setAttribute('id',options.background);
+			background=document.createElement('div');
+			background.setAttribute('id',options.background);
 
-			div=document.createElement('div');
-			div.setAttribute('id',options.div);
-			if(options.draggable) {
-				draggable();
-				div.ondblclick=doCentre;
+				div=document.createElement('div');
+				div.setAttribute('id',options.div);
+				if(options.draggable) {
+					draggable();
+					div.ondblclick=doCentre;
+				}
+
+				if(options.dblclick)  background.ondblclick=hide;
+				else background.onclick=hide;
+
+				background.appendChild(div);
+
+					img=document.createElement('img');
+					div.appendChild(img);
+
+					title=document.createElement('div');
+					title.setAttribute('id',options.title);
+					div.appendChild(title);
+
+			document.body.appendChild(background);
+
+		/*	Acivate Images
+			================================ */
+
+			var i,images,x=null;
+			images=document.querySelectorAll(selector);
+
+			if(!images.length) return false;
+
+			for(i=0;i<images.length;i++) {
+				images[i].onmousedown=doMousedown;
+				images[i].onmouseup=doMouseup;
+//				images[i].onclick=doClick;
+
+
+				if(options.dblclick) {
+					images[i].onclick=function(e) { return false; };
+					images[i].ondblclick=function(e) {
+						show(this);
+						return false;
+					};
+				}
+				else {
+					images[i].onclick=function(e) {
+						show(this);
+						return false;
+					};
+				}
 			}
 
-			if(options.dblclick)  background.ondblclick=hide;
-			else background.onclick=hide;
-
-			background.appendChild(div);
-
-				img=document.createElement('img');
-				div.appendChild(img);
-
-				title=document.createElement('div');
-				title.setAttribute('id',options.title);
-				div.appendChild(title);
-
-		document.body.appendChild(background);
-
-		images=document.querySelectorAll(selector);
-
-		if(!images.length) return false;
-
-		for(i=0;i<images.length;i++) {
-			images[i].onmousedown=doMousedown;
-			images[i].onmouseup=doMouseup;
-//			images[i].onclick=doClick;
-
-
-			if(options.dblclick) {
-				images[i].onclick=function(e) {return false; };
-				images[i].ondblclick=function(e) {
-					show(this);
-					return false;
-				};
+		/*	Event Functions
+			================================ */
+			function doMousedown(event) {	//	Position of mouse down
+				event=event||window.event;
+				x=event.clientX;
 			}
-			else {
-				images[i].onclick=function(e) {
-					show(this);
-					return false;
-				};
+			function doMouseup(event) {	//	If not moved
+				event=event||window.event;
+//				if(event.clientX==x) show(this);
+				return false;
 			}
-		}
-
-		function doMousedown(event) {	//	Position of mouse down
-			event=event||window.event;
-			x=event.clientX;
-		}
-		function doMouseup(event) {	//	If not moved
-			event=event||window.event;
-			if(event.clientX==x) show(this);
-			return false;
-		}
-		function doClick(event) {		//	Ignore actual click
-			return false;
-		}
-
-		function doShow(a) {
-			div.style.width=div.clientWidth+'px';
-			if(!div.dragged) doCentre();
-
-		}
-
-
-		function deSelect () {
-            if (window.getSelection) window.getSelection().removeAllRanges();
-            else if (document.selection.createRange) document.selection.empty ();
-        }
-
-
-		function show(a) {
-	//		var event=event||window.event;
-	//		var target=event.target||event.srcElement;
-			img.src=a.href;
-			background.style.display='block';
-			title.textContent='';
-			title.textContent=a.querySelector('img').title||a.querySelector('img').alt;
-			img.onload=function() {
-				doShow(a);
+			function doClick(event) {		//	Ignore actual click
+				return false;
 			}
-			background.setAttribute(options.showing,true);
-			div.setAttribute(options.showing,true);
-			img.setAttribute(options.showing,true);
 
-			if(options.escape) window.addEventListener('keypress',doEscape,false);
-			deSelect();
-		}
-		function doEscape(event) {
-			event = event || window.event;
-			if (event.keyCode == 27) doHide();
-		}
-		function hide(event) {
-			event=event||window.event;
-			var target=event.target||event.srcElement;
-			if(target!=background) return;
-			doHide();
-		}
-		function doHide() {
-			background.removeAttribute(options.showing);
-			div.removeAttribute(options.showing);
-			img.removeAttribute(options.showing);
-			if(options.delay) window.setTimeout(hideBackground,options.delay);
-			else hideBackground();
+		/*	Display Functions
+			================================ */
 
-			function hideBackground() {
-				background.style.display='none';
+			function deSelect () {
+				//	Deselect everything
+				if (window.getSelection) window.getSelection().removeAllRanges();
+				else if (document.selection.createRange) document.selection.empty ();
 			}
-		}
-		function doCentre() {
-			div.style.left = (window.innerWidth - div.offsetWidth)/2 + 'px';
-			div.style.top = (window.innerHeight - div.offsetHeight)/2 + 'px';
-		}
+
+			function doShow(a) {
+				//	Adjust size & position
+				div.style.width=div.clientWidth+'px';
+				title.textContent=a.querySelector('img').title||a.querySelector('img').alt;
+				if(!div.dragged) doCentre();
+				background.setAttribute(options.showing,true);
+				div.setAttribute(options.showing,true);
+				img.setAttribute(options.showing,true);
+			}
+			function show(a) {
+				background.style.display='block';
+				title.textContent='';
+//				title.textContent=a.querySelector('img').title||a.querySelector('img').alt;
+				img.onload=function() {
+					doShow(a);
+				}
+				img.src=a.href;
+
+				if(options.escape) window.addEventListener('keypress',doEscape,false);
+				deSelect();
+			}
+
+			function doEscape(event) {
+				event = event || window.event;
+				if (event.keyCode == 27) {
+					doHide();
+					window.removeEventListener('keypress',doEscape,false)
+				}
+			}
+			function hide(event) {
+				event=event||window.event;
+				var target=event.target||event.srcElement;
+				if(target!=background) return;
+				doHide();
+			}
+			function doHide() {
+				background.removeAttribute(options.showing);
+				div.removeAttribute(options.showing);
+				img.removeAttribute(options.showing);
+				if(options.delay) window.setTimeout(hideBackground,options.delay);
+				else hideBackground();
+
+				function hideBackground() {
+					background.style.display='none';
+				}
+			}
+			function doCentre() {
+				div.style.left = (window.innerWidth - div.offsetWidth)/2 + 'px';
+				div.style.top = (window.innerHeight - div.offsetHeight)/2 + 'px';
+			}
 
 		function draggable() {
 //			element.style.position='absolute';

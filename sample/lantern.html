@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Title</title>
+	<title>Lantern Demo</title>
 	<meta charset="UTF-8">
 	<script type="text/javascript" src="../lantern.js"></script>
 	<link rel="stylesheet" type="text/css" href="../lantern.css" media="all">
@@ -19,24 +19,24 @@
 		}
 	</script>
 	<style type="text/css">
-		h1 {
-			transition: display 1s 1s;
+		body {
+			font-family: sans-serif;
+			font-size: 87.5%;
 		}
-		h1:active {
-			border: thin solid red;
-
-		}
-		div {
-			box-sizing: border-box;
-		}
-
 	</style>
 </head>
 <body>
 	<header>
 	</header>
 	<main>
-		<h1>Slides</h1>
+		<h1>Lantern Demo</h1>
+		<p>This is a simple light-weight LightBox Clone.
+			Each thumbnail below is linked to a larger version.</p>
+			<ul>
+				<li>Double-Click on any image.</li>
+				<li>Double-Click on the background to hide larger image.</li>
+				<li>You can drag the image container around.</li>
+			</ul>
 		<div id="slides">
 			<a href="images/preview/wombat.jpg"><img src="images/thumbnail/wombat.jpg" alt="wombat" title="This is a Wombat, which is sort of like a wombat"></a>
 			<a href="images/preview/koala.jpg"><img src="images/thumbnail/koala.jpg" alt="koala"></a>
