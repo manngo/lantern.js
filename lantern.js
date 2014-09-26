@@ -79,7 +79,7 @@
 		/*
 			================================ */
 
-		var i,images;
+		var i,images,x=null;
 		var background,div,img,title;
 
 		background=document.createElement('div');
@@ -109,7 +109,13 @@
 		images=document.querySelectorAll(selector);
 
 		if(!images.length) return false;
+
 		for(i=0;i<images.length;i++) {
+			images[i].onmousedown=doMousedown;
+			images[i].onmouseup=doMouseup;
+//			images[i].onclick=doClick;
+
+
 			if(options.dblclick) {
 				images[i].onclick=function(e) {return false; };
 				images[i].ondblclick=function(e) {
@@ -125,23 +131,48 @@
 			}
 		}
 
+		function doMousedown(event) {	//	Position of mouse down
+			event=event||window.event;
+			x=event.clientX;
+		}
+		function doMouseup(event) {	//	If not moved
+			event=event||window.event;
+			if(event.clientX==x) show(this);
+			return false;
+		}
+		function doClick(event) {		//	Ignore actual click
+			return false;
+		}
+
+		function doShow(a) {
+			div.style.width=div.clientWidth+'px';
+			if(!div.dragged) doCentre();
+
+		}
+
+
+		function deSelect () {
+            if (window.getSelection) window.getSelection().removeAllRanges();
+            else if (document.selection.createRange) document.selection.empty ();
+        }
+
+
 		function show(a) {
 	//		var event=event||window.event;
 	//		var target=event.target||event.srcElement;
-			background.style.display='block';
 			img.src=a.href;
+			background.style.display='block';
 			title.textContent='';
-			div.style.width=div.clientWidth+'px';
 			title.textContent=a.querySelector('img').title||a.querySelector('img').alt;
-
-			if(!div.dragged) doCentre();
-
+			img.onload=function() {
+				doShow(a);
+			}
 			background.setAttribute(options.showing,true);
 			div.setAttribute(options.showing,true);
 			img.setAttribute(options.showing,true);
 
 			if(options.escape) window.addEventListener('keypress',doEscape,false);
-
+			deSelect();
 		}
 		function doEscape(event) {
 			event = event || window.event;
@@ -225,20 +256,20 @@
 
 
 		function say(message) {
-            var div=document.createElement('div');
-            //	div.style.cssText='';
-            div.setAttribute('id','message');
+			var div=document.createElement('div');
+			//	div.style.cssText='';
+			div.setAttribute('id','message');
 
-            div.style.cssText='width: 200px; height: 200px;\
-                overflow: auto; position: fixed;\
-                right: 20px; top: 20px; white-space: pre-wrap;\
-                border: thin solid #666;\
-                box-shadow: 4px 4px 4px #666;\
-                padding: 1em; font-family: monospace;';
+			div.style.cssText='width: 200px; height: 200px;\
+				overflow: auto; position: fixed;\
+				right: 20px; top: 20px; white-space: pre-wrap;\
+				border: thin solid #666;\
+				box-shadow: 4px 4px 4px #666;\
+				padding: 1em; font-family: monospace;';
 
-            document.body.appendChild(div);
-            say=function(message) {
-                div.textContent+=message+'\n';
-            };
-            say(message);
-        }
+			document.body.appendChild(div);
+			say=function(message) {
+				div.textContent+=message+'\n';
+			};
+			say(message);
+		}
