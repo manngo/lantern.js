@@ -56,8 +56,8 @@
 	To do:
 
 	1.	Incorporate slide show.
-	2.	Incorporate div for additional descriptive text:
-		<a href="..." class="light"><img ... /><div>Description</div></a>
+	2.	Incorporate span for additional descriptive text:
+		<a href="..." class="light"><img ... /><span>Description</span></a>
 	3.	Re-consider whether the selector above needs to include the a.
 
 	================================================ */
@@ -280,16 +280,17 @@
 			//	div.style.cssText='';
 			div.setAttribute('id','message');
 
-			div.style.cssText='width: 200px; height: 200px;\
+			div.style.cssText='width: 200px; height: 100px;\
 				overflow: auto; position: fixed;\
-				right: 20px; top: 20px; white-space: pre-wrap;\
-				border: thin solid #666;\
+				right: 20px; bottom: 20px; white-space: pre-wrap;\
+				border: thin solid #666; background-color: rgba(255,255,255,.8);\
 				box-shadow: 4px 4px 4px #666;\
 				padding: 1em; font-family: monospace;';
 
 			document.body.appendChild(div);
 			say=function(message) {
-				div.textContent+=message+'\n';
+				if(!message) div.textContent='';
+				else div.textContent+=message+'\n';
 			};
 			say(message);
 		}

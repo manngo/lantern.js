@@ -3,7 +3,7 @@ Lantern
 
 Mark Simon
 
-This script is a stripped-down light box clone.
+This script is a light-weight light box clone.
 
 To use:
 
@@ -30,7 +30,9 @@ To use:
 			}
 		</script>
 
-4.	Options are, well, optional. Set them as an abject as follows:
+4.	The selector ```div#slides a``` includes tha actual anchor elements which are to be hijacked.
+
+5.	Options are, well, optional. Set them as an abject as follows:
 
 		var options = {
 			background:	'background',	//	id of background
@@ -43,14 +45,17 @@ To use:
 			//	new
 			dblclick:	false,			//	whether to use double-click
 			draggable:	false,			//	whether to allow dragging
+			callback:		undefined,		//	callback on showing
+			callbackOn:		undefined,		//	callback on both
+			callbackOff:	undefined,		//	callback on hiding
 		};
 
-5.	The (sample) CSS file comes in three parts. Feel free to tweak as much as you like, but note the following:
-	
+6.	The (sample) CSS file comes in three parts. Feel free to tweak as much as you like, but note the following:
+
 	1.	The essential CSS required for the effect to work at all.
 	2. Some more basic CSS to make it look complete.
 	3. Some CSS3 to make the whole thing look spectacular.
-		
+
 		Obviously, the CSS won’t work in Legacy™ Browsers.
 
 Disclaimer
@@ -68,8 +73,8 @@ To do
 -----
 
 1.	Incorporate slide show.
-2.	Incorporate div for additional descriptive text:
+2.	Incorporate span for additional descriptive text:
 
-		<a href="..." class="light"><img ... /><div>Description</div></a>
+		<a href="..." class="light"><img ... /><span>Description</span></a>
 
-3.	Implement callback functions
+3.	Re-consider whether the selector above needs to include the a.
