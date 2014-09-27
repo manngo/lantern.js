@@ -1,0 +1,100 @@
+/*	Lantern Style Sheet
+	================================================
+
+	================================================ */
+
+/*	Required
+	================================================ */
+
+	div#background, div#lantern, div#title {
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	div#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0);
+		display: none;
+	}
+	div#background[showing] {
+		background-color: rgba(0,0,0,.6);
+	}
+
+	div#lantern {
+		position: fixed;
+	}
+
+
+/*	Useful
+	================================================ */
+
+	div#lantern {
+		position: fixed;
+		padding: 1em;
+		background-color: #f8f8f8;
+		background-color: #ddd;
+		border: thin solid #666;
+	}
+	div#title {
+		font-size: 1.2em;
+		text-align: center;
+		font-family: sans-serif;
+		font-weight: bold;
+		margin: 0;
+		padding: .75em;
+	}
+
+/*	Fancy
+	================================================ */
+
+	div#background {
+		transition: all 1s;
+	}
+
+	@keyframes pulsing {
+		from {
+			background-position: 0 0;
+		}
+		50% {
+			background-position: 0 50%;
+		}
+		to {
+			background-position: 0 100%;
+		}
+	}
+
+	div#lantern {
+		border-radius: 8px;
+		box-shadow: inset 4px 4px 2px white, inset -4px -4px 4px #999, 4px 4px 4px #000;
+		background-image: linear-gradient(-15deg, #ddd 30%, #eee 50%, #ddd 60%, #eee 90%);
+		background-size: 100% 200%;
+		animation: pulsing 2s infinite alternate;
+		transform: scale(0);
+		transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+
+	div#lantern img {
+		border-radius: 8px;
+		box-shadow: inset 4px 4px 2px #999, inset -4px -4px 4px white;
+		padding: 4px;
+	}
+
+
+	div#lantern[showing] {
+		transform: scale(1);
+	}
+
+	div#title {
+		color: #666;
+		border-radius: 4px;
+		box-shadow: inset 4px 4px 2px #999, inset -4px -4px 4px white;
+	}
+
+	div#background[showing] {
+		border: thick solid #999;
+	}
