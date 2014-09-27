@@ -47,7 +47,6 @@
 		font-weight: bold;
 		margin: 0;
 		padding: .75em;
-
 	}
 
 /*	Fancy
@@ -55,20 +54,6 @@
 
 	div#background {
 		transition: all 1s;
-	}
-
-	qh1 {
-		text-shadow: 0px 1px 0px white;
-		height: 200px;
-		padding: 1em;
-		background-color: #ddd;
-		border: thin solid #666;
-		border-radius: 8px;
-		box-shadow: inset 4px 4px 2px white, inset -4px -4px 4px #999, 4px 4px 4px #000;
-		transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		background-image: linear-gradient(-15deg, #ddd 30%, #eee 50%, #ddd 60%, #eee 90%);
-		background-size: 100% 200%;
-		animation: pulsing 4s infinite alternate;
 	}
 
 	@keyframes pulsing {
@@ -81,9 +66,7 @@
 		to {
 			background-position: 0 100%;
 		}
-
 	}
-
 
 	div#lantern {
 		border-radius: 8px;
@@ -115,4 +98,3 @@
 	div#background[showing] {
 		border: thick solid #999;
 	}
-
