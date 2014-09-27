@@ -58,8 +58,7 @@
 	1.	Incorporate slide show.
 	2.	Incorporate div for additional descriptive text:
 		<a href="..." class="light"><img ... /><div>Description</div></a>
-	3.	Implement callback functions
-	4.	Re-consider whether the selector above needs to include the a.
+	3.	Re-consider whether the selector above needs to include the a.
 
 	================================================ */
 
@@ -176,6 +175,7 @@
 				img.setAttribute(options.showing,true);
 			}
 			function show(a) {
+				if(options.callbackOn) options.callbackOn();
 				background.style.display='block';
 				title.textContent='';
 //				title.textContent=a.querySelector('img').title||a.querySelector('img').alt;
@@ -186,6 +186,7 @@
 
 				if(options.escape) window.addEventListener('keypress',doEscape,false);
 				deSelect();
+				if(options.callback) options.callback();
 			}
 
 			function doEscape(event) {
@@ -199,7 +200,9 @@
 				event=event||window.event;
 				var target=event.target||event.srcElement;
 				if(target!=background) return;
+				if(options.callback) options.callback();
 				doHide();
+				if(options.callbackOff) options.callbackOff();
 			}
 			function doHide() {
 				background.removeAttribute(options.showing);

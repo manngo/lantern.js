@@ -14,8 +14,20 @@
 				escape: true,
 				dblclick: true,
 				draggable: true,
+				callbackOn: doOn,
+				callback: doIt,
+				callbackOff: doOff,
 			};
 			lantern('div#slides a',options);
+		}
+		function doOn() {
+			say('Starting');
+		}
+		function doIt() {
+			say('Meanwhile');
+		}
+		function doOff() {
+			say('Finishing');
 		}
 	</script>
 	<style type="text/css">
