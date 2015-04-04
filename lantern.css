@@ -1,34 +1,71 @@
 /*	Lantern Style Sheet
 	================================================
 
+	This is where you can modify the visual behaviour.
+
+	This stylesheet presumes that the elements have
+	the following ids:
+
+		#background		Background screen while showing
+		#lantern		Image Container
+		#caption		Caption for image
+
+	It also presumes that you are using the following
+	additional attribute name
+
+		[showing]		While everything is showing
+
+	You can change the ids and attribute name in the
+	JavaScript options:
+
+		var options = {
+			background:		'background',	//	id of background
+			div:			'lantern',		//	id of container
+			caption:		'caption',		//	id of title
+			showing:		'showing',		//	attribute when showing
+
+			//	etc
+		};
+
+	This style sheet is divided into the following sections:
+
+	Required	These reules are required to make the
+				effect work at all.
+				You probably should leave these alone.
+				This will be moved to the JavaScript.
+
+	Useful		Some basic CSS to make the image container
+				and caption look right.
+
+	Fancy		Some additional CSS, mostly CSS3, to make
+				the effect much more interesting.
+				Knock yourself out.
+				CSS3 won’t work on legacy browersers of course,
+				but that’s not important.
+
 	================================================ */
 
 /*	Required
 	================================================ */
 
-	div#background, div#lantern, div#title {
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
+body {
+border: thick solid red !important;
+}
+
+	div#background, div#lantern, div#caption {
+
 	}
 
 	div#background {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgb(0,0,0);
-		background-color: rgba(0,0,0,0);
-		display: none;
+
 	}
 	div#background[showing] {
-		background-color: rgba(0,0,0,.6);
+
 	}
 
 	div#lantern {
-		position: fixed;
-	}
 
+	}
 
 /*	Useful
 	================================================ */
@@ -40,7 +77,7 @@
 		background-color: #ddd;
 		border: thin solid #666;
 	}
-	div#title {
+	div#caption {
 		font-size: 1.2em;
 		text-align: center;
 		font-family: sans-serif;
@@ -89,7 +126,7 @@
 		transform: scale(1);
 	}
 
-	div#title {
+	div#caption {
 		color: #666;
 		border-radius: 4px;
 		box-shadow: inset 4px 4px 2px #999, inset -4px -4px 4px white;

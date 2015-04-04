@@ -4,21 +4,31 @@
 	<title>Lantern Demo</title>
 	<meta charset="UTF-8">
 	<script type="text/javascript" src="lantern.js"></script>
-	<link rel="stylesheet" type="text/css" href="lantern.css" media="all">
+	<link rel="stylesheet" type="text/css" href="qlantern.css" media="all">
 
 	<script type="text/javascript">
 		window.onload=init;
 		function init() {
-			var options={
-				delay: 1000,
-				escape: true,
-				dblclick: true,
-				draggable: true,
-				callbackOn: doOn,
-				callback: doIt,
-				callbackOff: doOff,
-			};
-			lantern('div#slides a',options);
+			//	Popup
+				var options={
+					delay: 1000,
+					escape: true,
+					dblclick: false,
+					draggable: true,
+//					callbackOn: doOn,
+//					callback: doIt,
+//					callbackOff: doOff,
+					navigation: true,
+				};
+				lantern('div#popup a',options);
+
+			//	On Screen
+				var options={
+					navigation: false,
+					div: 'box',
+					box: true
+				};
+				lantern('div#on-screen a',options);
 		}
 		function doOn() {
 			say();
@@ -36,6 +46,76 @@
 			font-family: sans-serif;
 			font-size: 87.5%;
 		}
+
+		div#info {
+			display: table;
+			width: 100%;
+			table-layout: auto;
+		}
+
+		div#info>span,
+		div#info>div {
+			display: table-cell;
+		}
+		div#info>span {
+			width: .5em;
+			text-align: center;
+			font-size: 4em;
+			vertical-align: middle;
+		}
+		div#info>span>a {
+			display: block;
+			border: thin solid #666;
+			border-radius: .5em;
+		}
+
+		div#lantern {
+			background-color: #F8F8F8;
+			background-color: #eeeeee;
+			padding: 1em;
+		}
+		div#lantern div#caption {
+			font-size: .9em;
+			color: #666;
+			padding: 1em;
+			width: 100%;
+		}
+		div#lantern button#lantern-previous,
+		div#lantern button#lantern-next {
+			border: none;
+			font-weight: bold;
+			font-size: 1.5em;
+			background-color: #333;
+			color: white;
+			border-radius: 1.5em;
+			border: medium solid white;
+			box-shadow: 2px 2px 2px #666;
+		}
+
+		div#box {
+			border: thin solid #999;
+			width: 600px;
+			height: 400px;
+			box-shadow: 2px 2px 4px #999;
+			padding: 1em;
+		}
+		div#box div#caption {
+			font-size: .9em;
+			color: #666;
+			padding: 1em;
+			width: 100%;
+		}
+		div#box button#box-previous,
+		div#box button#box-next {
+			border: none;
+			font-weight: bold;
+			font-size: 1.5em;
+			background-color: #333;
+			color: white;
+			border-radius: 1.5em;
+			border: medium solid white;
+			box-shadow: 2px 2px 2px #666;
+		}
 	</style>
 </head>
 <body>
@@ -50,11 +130,19 @@
 				<li>Double-Click on the background to hide larger image.</li>
 				<li>You can drag the image container around.</li>
 			</ul>
-		<div id="slides">
+		<h2>Popup Demo</h2>
+		<div id="popup">
 			<a href="images/preview/wombat.jpg"><img src="images/thumbnail/wombat.jpg" alt="wombat" title="This is a Wombat, which is sort of like a wombat"></a>
 			<a href="images/preview/koala.jpg"><img src="images/thumbnail/koala.jpg" alt="koala"></a>
 			<a href="images/preview/kangaroo.jpg"><img src="images/thumbnail/kangaroo.jpg" alt="kangaroo" title="Kangaroo"></a>
 		</div>
+		<h2>On Screen Demo</h2>
+		<div id="on-screen">
+			<a href="images/preview/wombat.jpg"><img src="images/thumbnail/wombat.jpg" alt="wombat" title="This is a Wombat, which is sort of like a wombat"></a>
+			<a href="images/preview/koala.jpg"><img src="images/thumbnail/koala.jpg" alt="koala"></a>
+			<a href="images/preview/kangaroo.jpg"><img src="images/thumbnail/kangaroo.jpg" alt="kangaroo" title="Kangaroo"></a>
+		</div>
+		<div id="box"></div>
 	</main>
 	<footer>
 	</footer>
