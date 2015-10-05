@@ -3,6 +3,14 @@ Lantern
 
 Mark Simon
 
+Sample
+------
+
+Click [Here](https://manngo.github.io/lantern.js/sample/lantern.html) for the sample …
+
+Introduction
+------------
+
 This script is a light-weight light box clone.
 
 To use:
@@ -63,11 +71,6 @@ Disclaimer
 
 This script probably works and it does what it does.  
 What it doesn’t do it doesn’t do. E & OE
-
-Sample
-------
-
-Click [Here](https://manngo.github.io/lantern.js/sample/lantern.html) for the sample …
 
 To do
 -----
